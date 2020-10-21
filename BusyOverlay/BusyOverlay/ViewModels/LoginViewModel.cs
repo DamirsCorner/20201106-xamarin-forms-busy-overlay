@@ -1,4 +1,5 @@
 ﻿using BusyOverlay.Views;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,10 +19,19 @@ namespace BusyOverlay.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            await Task.Delay(2000);
+            await PopupNavigation.Instance.PushAsync(new BusyPopupPage());
 
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            try
+            {
+                await Task.Delay(2000);
+
+                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            }
+            finally
+            {
+                await PopupNavigation.Instance.PopAsync();
+            }
         }
     }
 }
