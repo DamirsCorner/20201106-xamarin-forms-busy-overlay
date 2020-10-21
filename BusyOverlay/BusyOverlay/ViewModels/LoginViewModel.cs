@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace BusyOverlay.ViewModels
@@ -17,6 +18,8 @@ namespace BusyOverlay.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
+            await Task.Delay(2000);
+
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
         }
